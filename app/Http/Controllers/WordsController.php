@@ -7,12 +7,22 @@ use Illuminate\Http\Request;
 
 class WordsController extends Controller
 {
+
+    public function login()
+    {
+        return [
+            'success' => true,
+            'user_id' => 1,
+            'token' => 'qwerty',
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function index()
+    public function index(): \Illuminate\Database\Eloquent\Collection
     {
         return Word::all();
     }

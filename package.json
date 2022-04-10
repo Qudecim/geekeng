@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "ant-design-vue": "^2.2.8",
-        "vue": "^3.2.31"
+        "vue": "^3.2.31",
+        "vuex": "^4.0.2"
     }
 }

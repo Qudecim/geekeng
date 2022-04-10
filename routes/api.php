@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-Route::resource('word', \App\Http\Controllers\WordsController::class);
+//Route::resource('word', \App\Http\Controllers\WordsController::class);
+Route::post('sign_in', [\App\Http\Controllers\UsersController::class, 'signIn']);
+Route::post('sign_up', [\App\Http\Controllers\UsersController::class, 'signUp']);
