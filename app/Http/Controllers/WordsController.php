@@ -8,14 +8,6 @@ use Illuminate\Http\Request;
 class WordsController extends Controller
 {
 
-    public function login()
-    {
-        return [
-            'success' => true,
-            'user_id' => 1,
-            'token' => 'qwerty',
-        ];
-    }
 
     /**
      * Display a listing of the resource.
@@ -25,16 +17,6 @@ class WordsController extends Controller
     public function index(): \Illuminate\Database\Eloquent\Collection
     {
         return Word::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -65,29 +47,6 @@ class WordsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Word $word)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Word  $word
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Word $word)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Word  $word
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Word $word)
     {
         //
     }
