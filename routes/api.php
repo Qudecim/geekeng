@@ -18,17 +18,24 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-//Route::resource('word', \App\Http\Controllers\WordsController::class);
+
 Route::post('sign_in', [\App\Http\Controllers\UsersController::class, 'signIn']);
 Route::post('sign_up', [\App\Http\Controllers\UsersController::class, 'signUp']);
 
 
-Route::get('group/', [\App\Http\Controllers\WordGroupsController::class, 'index']);
-Route::get('group/{wordGroup}', [\App\Http\Controllers\WordGroupsController::class, 'show']);
-Route::post('group/', [\App\Http\Controllers\WordGroupsController::class, 'store']);
-Route::delete('group/{wordGroup}', [\App\Http\Controllers\WordGroupsController::class, 'destroy']);
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::get('word/', [\App\Http\Controllers\WordsController::class, 'index']);
-Route::get('word/{Word}', [\App\Http\Controllers\WordsController::class, 'show']);
-Route::post('word/', [\App\Http\Controllers\WordsController::class, 'store']);
-Route::delete('word/{Word}', [\App\Http\Controllers\WordsController::class, 'destroy']);
+    // WORD GROUP
+    Route::get('group', [\App\Http\Controllers\WordGroupsController::class, 'index']);
+    Route::get('group/{wordGroup}', [\App\Http\Controllers\WordGroupsController::class, 'show']);
+    Route::post('group', [\App\Http\Controllers\WordGroupsController::class, 'store']);
+    Route::delete('group/{wordGroup}', [\App\Http\Controllers\WordGroupsController::class, 'destroy']);
+
+    // WORD
+    Route::get('word', [\App\Http\Controllers\WordsController::class, 'index']);
+    Route::get('word/{Word}', [\App\Http\Controllers\WordsController::class, 'show']);
+    Route::post('word', [\App\Http\Controllers\WordsController::class, 'store']);
+    Route::delete('word/{Word}', [\App\Http\Controllers\WordsController::class, 'destroy']);
+
+});
+
