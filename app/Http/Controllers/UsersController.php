@@ -33,7 +33,7 @@ class UsersController extends Controller
 
         return [
             'success' => true,
-            'token' => $user->createToken()->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken
         ];
 
     }
@@ -56,7 +56,7 @@ class UsersController extends Controller
             'success' => true,
             'name' => $user->name,
             'email' => $user->email,
-            'token' => $user->createToken()->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken
         ];
     }
 
