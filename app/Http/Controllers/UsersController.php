@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -18,33 +19,42 @@ class UsersController extends Controller
      */
     public function signIn(Request $request)
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
 
         $user = User::where('email', $request->email)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return [
-                'success' => false,
+                'errors' => ['password' => ['Wrong password']]
             ];
         }
 
         return [
-            'success' => true,
-            'token' => $user->createToken('api_token')->plainTextToken
+            'token' => $user->createToken('api_token')->plainTextToken,
+            'name' => $user->name
         ];
 
     }
 
     public function signUp(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|string|min:8'
         ]);
+
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -53,9 +63,7 @@ class UsersController extends Controller
         ]);
 
         return [
-            'success' => true,
             'name' => $user->name,
-            'email' => $user->email,
             'token' => $user->createToken('api_token')->plainTextToken
         ];
     }
