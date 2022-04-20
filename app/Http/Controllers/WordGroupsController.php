@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\WordGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class WordGroupsController extends Controller
 {
 
     public function index(Request $request)
     {
-        // validate
-
-        return WordGroup::where('user_id', auth()->user()->id)->paginate(15);
+        return WordGroup::where('user_id', auth()->user()->id)->get();
     }
 
     public function show(WordGroup $wordGroup)
@@ -24,9 +23,18 @@ class WordGroupsController extends Controller
 
     public function store(Request $request)
     {
-        // Validate
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255|min:3',
+        ]);
 
-        WordGroup::create($request->all());
+        if ($validator->fails()) {
+            return ['errors' => $validator->errors()];
+        }
+
+        WordGroup::create([
+            'user_id' => auth()->user()->id,
+            'name' => $request->name
+        ]);
 
         return [
             'success' => true

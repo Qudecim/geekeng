@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WordGroup extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'name'];
+
 }
