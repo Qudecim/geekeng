@@ -33,7 +33,8 @@ class WordGroupsController extends Controller
 
         WordGroup::create([
             'user_id' => auth()->user()->id,
-            'name' => $request->name
+            'name' => $request->name,
+            'description' => $request->description ?? ''
         ]);
 
         return [
@@ -43,8 +44,6 @@ class WordGroupsController extends Controller
 
     public function destroy(WordGroup $wordGroup)
     {
-        // validate
-
         $wordGroup->delete();
 
         return [
